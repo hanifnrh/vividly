@@ -1,4 +1,4 @@
-.about p {
+.about .description{
     width: 50%;
     font-size: 1.7rem;
     text-align: center;
@@ -14,4 +14,23 @@
 .about img{
     width: 300px;
     border-radius: 0;
+}
+
+@media screen and (max-width: 426px) {
+    .about .description {
+        width: 80% !important;
+        font-size: 1rem;
+        text-align: center;
+    }
+
+    .about {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+    .about img {
+        width: 200px;
+        border-radius: 0;
+    }
 }
