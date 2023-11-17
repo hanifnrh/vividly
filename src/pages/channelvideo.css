@@ -1,0 +1,24 @@
+.channelwrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgb(62, 121, 209);
+    padding: 30px;
+    width: 50%;
+    gap: 1rem;
+    margin: 20px;
+}
+
+.channelwrapper img{
+    width: 400px;
+    border-radius: 0;
+}
+
+.channelwrapper h2{
+    color: white;
+}
+
+.channelvideos {
+    display: flex;
+    justify-content: center;
+}
