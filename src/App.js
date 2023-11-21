@@ -8,6 +8,7 @@ import SubscriptionsIcon from '@mui/icons-material/Subscriptions';
 import DetailPage from "./pages/DetailPage";
 import LandingPage from "./pages/LandingPage";
 import ProfilePage from "./pages/ProfilePage";
+import VideoDetail from "./pages/VideoDetail";
 // Components
 import { HiHome } from 'react-icons/hi';
 
@@ -52,6 +53,7 @@ function App() {
           <Route path="/channel" element={<Channel />} />
           <Route path="/detail/:id" element={<DetailPage />} />
           <Route path="/channel-video/:id" element={<ChannelVideo />} />
+          <Route path="/video/:videoId" component={VideoDetail} />
         </Routes>
       </div>
     </Router>

@@ -1,14 +1,18 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import "./channelvideo.css";
+import { useNavigate } from 'react-router-dom';
+import Card from '../components/card';
 
-const ChannelVideo = () => {
-    const [videos, setVideos] = useState([]);
-    const { channelId } = useParams();
+export default function LandingPage() {
+    const [data, setData] = useState(null);
+    const [isLoaded, setisLoaded] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [query, setQuery] = useState('All');
+    const nav = useNavigate();
 
     useEffect(() => {
-        const fetchChannelVideo = async () => {
+        const fetchData = async (query) => {
+            setIsLoading(true);
             try {
                 const response = await axios.get('https://youtube-v31.p.rapidapi.com/search', {
                     params: {
@@ -19,45 +23,52 @@ const ChannelVideo = () => {
                     },
                     headers: {
                         'X-RapidAPI-Key': '113ec38266msh8121ec0eb2a219fp1ed462jsn532b65aa5bde',
-                        'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com'
-                    }
+                        'X-RapidAPI-Host': 'youtube-v31.p.rapidapi.com',
+                    },
                 });
                 if (response.status === 200) {
-                    setVideos(response.data.items);
+                    setData(response.data);
+                    setisLoaded(true);
+                    setIsLoading(false);
                 }
-            } catch (error) {
-                console.error(error);
+            } catch (err) {
+                console.log(err);
+                setIsLoading(false);
             }
         };
+        if (!isLoaded) {
+            fetchData(query);
+        }
+    }, [isLoaded, query]);
 
-        fetchChannelVideo();
-    }, [channelId]);
+    const onSearch = (e) => {
+        if (e.key === 'Enter') {
+            setisLoaded(false);
+            setQuery(e.target.value);
+        }
+    };
 
-    // ... (kode sebelumnya)
+    const handleClick = (item) => {
+        navToDetail(item);
+    };
+
+    const navToDetail = (item) => {
+        nav(`/detail/${item.id.videoId}`, { state: { itemData: item } });
+    };
 
     return (
-        <div>
-            <h1>Channel Videos</h1>
-            <div>
-                {videos.map((video) => (
-                    <div key={video.id.videoId} className='channelvideos'>
-                        <a
-                            href={`https://www.youtube.com/watch?v=${video.id.videoId}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className='channelwrapper'
-                        >
-                            <h2>{video.snippet.title}</h2>
-                            <p>{video.snippet.description}</p>
-                            <img src={video.snippet.thumbnails.high.url} alt="Thumbnail" />
-                        </a>
-                    </div>
-                ))}
-            </div>
-        </div>
+        <main>
+            <input type="text" placeholder="Search videos" onKeyDown={(e) => onSearch(e)} />
+            <h3 className="title">{query} Videos</h3>
+            {!data || isLoading ? (
+                <p className='loading'>Loading...</p>
+            ) : (
+                <div className="card-container">
+                    {data.items.map((item, index) => {
+                        return <Card data={item} key={index} onClick={() => handleClick(item)} />;
+                    })}
+                </div>
+            )}
+        </main>
     );
-
-
-};
-
-export default ChannelVideo;
+}
