@@ -18,11 +18,8 @@ const Card = ({ data, onClick }) => {
             {data ? (
                 <>
                     <div className="card-info">
-                        {/* Display video title */}
                         <h3>{data.snippet.title}</h3>
-                        {/* Display channel name */}
                         <p>Channel: {data.snippet.channelTitle}</p>
-                        {/* Display video thumbnail */}
                         <img
                             src={data.snippet.thumbnails.default.url}
                             alt={data.snippet.title}
