@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
+    border-radius: 60px;
 }
 
 .title p {
@@ -12,13 +13,14 @@
 }
 
 p {
-    color: black;
+    color: white;
 }
 .wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 4rem;
+    width: 80%;
 }
 .detail-wrapper img {
     width: 300px;
@@ -134,7 +136,7 @@ p {
         width: 80%;
         gap: 1rem;
         margin: 20px;
-        border-radius: 20px;
+        border-radius: 60px;
     }
 
     .channelwrapper img {

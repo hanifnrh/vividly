@@ -13,7 +13,7 @@ const Channel = () => {
                 const response = await axios.get('https://youtube-v31.p.rapidapi.com/channels', {
                     params: {
                         part: 'snippet,statistics',
-                        id: 'UCBVjMGOIkavEAhyqpxJ73Dw'
+                        id: 'UCdU5OncGSaRQNKHVCsyXppg'
                     },
                     headers: {
                         'X-RapidAPI-Key': '113ec38266msh8121ec0eb2a219fp1ed462jsn532b65aa5bde',

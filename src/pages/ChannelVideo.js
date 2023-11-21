@@ -12,7 +12,7 @@ const ChannelVideo = () => {
             try {
                 const response = await axios.get('https://youtube-v31.p.rapidapi.com/search', {
                     params: {
-                        channelId: 'UCBVjMGOIkavEAhyqpxJ73Dw',
+                        channelId: 'UCdU5OncGSaRQNKHVCsyXppg',
                         part: 'snippet,id',
                         order: 'date',
                         maxResults: '50'
@@ -33,24 +33,30 @@ const ChannelVideo = () => {
         fetchChannelVideo();
     }, [channelId]);
 
+    // ... (kode sebelumnya)
+
     return (
         <div>
             <h1>Channel Videos</h1>
             <div>
                 {videos.map((video) => (
                     <div key={video.id.videoId} className='channelvideos'>
-
-                        <div className='channelwrapper'>
+                        <a
+                            href={`https://www.youtube.com/watch?v=${video.id.videoId}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className='channelwrapper'
+                        >
                             <h2>{video.snippet.title}</h2>
                             <p>{video.snippet.description}</p>
-                            <img src={video.snippet.thumbnails.default.url} alt="Thumbnail" />
-                        </div>
+                            <img src={video.snippet.thumbnails.high.url} alt="Thumbnail" />
+                        </a>
                     </div>
                 ))}
             </div>
         </div>
-
     );
+
 
 };
 

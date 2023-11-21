@@ -21,7 +21,7 @@ const Card = ({ data, onClick }) => {
                         <h3>{data.snippet.title}</h3>
                         <p>Channel: {data.snippet.channelTitle}</p>
                         <img
-                            src={data.snippet.thumbnails.default.url}
+                            src={data.snippet.thumbnails.high.url}
                             alt={data.snippet.title}
                         />
                     </div>
